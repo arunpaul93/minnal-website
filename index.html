@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minnal Homepage</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="nav-linear">
+    <div class="logo">Minnal</div>
+    <nav>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#get-started" class="cta-nav">Get Started</a>
+  </header>
+  <main>
+    <section class="hero-linear">
+      <div class="hero-bg-glass"></div>
+      <div class="code-bg-linear">
+        <pre><code>
+# Lightning-fast landing page
+
+def greet(name):
+    print(f"Hello, {name}! ⚡")
+
+class Lightning:
+    def __init__(self, speed):
+        self.speed = speed
+    def strike(self):
+        return f"Striking at {self.speed} km/s!"
+
+if __name__ == "__main__":
+    l = Lightning(299792)
+    print(l.strike())
+    greet("World")
+        </code></pre>
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">Work. Flow. Lightning Fast.</h1>
+        <p class="hero-desc">A next-generation landing page inspired by Linear. Minimal, dark, and visually stunning.</p>
+        <a href="#get-started" class="cta-main">Get Started</a>
+      </div>
+    </section>
+    <section id="features" class="features-linear">
+      <h2>Features</h2>
+      <div class="features-list">
+        <div class="feature-card-glass">
+          <h3>Minimal UI</h3>
+          <p>Distraction-free, bold, and beautiful interface.</p>
+        </div>
+        <div class="feature-card-glass">
+          <h3>Lightning Speed</h3>
+          <p>Instant transitions and smooth animations everywhere.</p>
+        </div>
+        <div class="feature-card-glass">
+          <h3>Modern Aesthetics</h3>
+          <p>Glassmorphism, gradients, and beautiful typography.</p>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="about-linear">
+      <h2>About</h2>
+      <p>This page is inspired by Linear’s world-class product design. Built with only HTML, CSS, and a touch of JavaScript for transitions.</p>
+    </section>
+    <section id="contact" class="contact-linear">
+      <h2>Contact</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Minnal Homepage. All rights reserved.</p>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
