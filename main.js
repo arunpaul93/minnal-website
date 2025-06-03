@@ -91,4 +91,149 @@ window.addEventListener('DOMContentLoaded', function() {
       icon.style.transform = 'scale(1)';
     });
   }, 100);
+
+  // === Moving Python Code Background Animation ===
+  const pythonSnippets = [
+    `def hello():\n    print('Hello, World!')`,
+    `for i in range(5):\n    print(i)`,
+    `class Lightning:\n    def __init__(self, speed):\n        self.speed = speed`,
+    `if __name__ == '__main__':\n    hello()`,
+    `import this`,
+    `print('⚡ Fast!')`,
+    `def add(a, b):\n    return a + b`,
+    `try:\n    x = 1/0\nexcept ZeroDivisionError:\n    pass`,
+    `with open('file.txt') as f:\n    data = f.read()`
+  ];
+  const bg = document.querySelector('.moving-code-bg');
+  const snippetCount = 8;
+  const snippets = [];
+
+  // --- Cursor-reactive foreground code layer ---
+  const fgLayer = document.createElement('div');
+  fgLayer.className = 'moving-code-fg';
+  fgLayer.style.position = 'fixed';
+  fgLayer.style.top = '0';
+  fgLayer.style.left = '0';
+  fgLayer.style.width = '100vw';
+  fgLayer.style.height = '100vh';
+  fgLayer.style.pointerEvents = 'none';
+  fgLayer.style.zIndex = '12';
+  document.body.appendChild(fgLayer);
+
+  const fgSnippets = [];
+  for (let i = 0; i < 5; i++) {
+    const el = document.createElement('pre');
+    el.className = 'moving-code-snippet moving-code-fg-snippet';
+    el.textContent = pythonSnippets[Math.floor(Math.random() * pythonSnippets.length)];
+    el.style.left = Math.random() * 80 + 'vw';
+    el.style.top = Math.random() * 80 + 'vh';
+    el.style.fontSize = (1.2 + Math.random() * 0.8) + 'rem';
+    el.style.opacity = 0.22 + Math.random() * 0.13;
+    fgLayer.appendChild(el);
+    fgSnippets.push(el);
+  }
+
+  let fgMouseX = 0, fgMouseY = 0;
+  document.addEventListener('mousemove', function(e) {
+    fgMouseX = e.clientX / window.innerWidth - 0.5;
+    fgMouseY = e.clientY / window.innerHeight - 0.5;
+  });
+
+  function animateFgSnippets() {
+    const now = Date.now();
+    fgSnippets.forEach((el, i) => {
+      const offsetX = Math.sin(now / 1200 + i) * 18 + fgMouseX * 120 * (0.5 + i/6);
+      const offsetY = Math.cos(now / 1100 + i) * 12 + fgMouseY * 90 * (0.5 + i/6);
+      el.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+    requestAnimationFrame(animateFgSnippets);
+  }
+  animateFgSnippets();
+
+  // Moving Python code background
+  const pythonSnippetsStatic = [
+    `def greet(name):\n    print(f"Hello, {name}!")`,
+    `class Lightning:\n    def __init__(self, speed):\n        self.speed = speed`,
+    `for i in range(5):\n    print(i)`,
+    `if __name__ == "__main__":\n    greet("World")`,
+    `import math\nprint(math.pi)`
+  ];
+
+  function randomBetween(a, b) {
+    return a + Math.random() * (b - a);
+  }
+
+  function createMovingSnippet(snippet, idx) {
+    const el = document.createElement('pre');
+    el.className = 'moving-code-snippet';
+    el.textContent = snippet;
+    // Random initial position
+    el.style.left = randomBetween(0, 80) + 'vw';
+    el.style.top = randomBetween(0, 80) + 'vh';
+    el.style.fontSize = randomBetween(1, 2.2) + 'rem';
+    el.style.opacity = 0.13 + Math.random() * 0.07;
+    el.dataset.dx = (Math.random() - 0.5) * 0.12;
+    el.dataset.dy = (Math.random() - 0.5) * 0.07;
+    return el;
+  }
+
+  const bgStatic = document.querySelector('.moving-code-bg-static');
+  if (bgStatic) {
+    const snippetsStatic = [];
+    for (let i = 0; i < 8; ++i) {
+      const snip = createMovingSnippet(
+        pythonSnippetsStatic[i % pythonSnippetsStatic.length], i
+      );
+      bgStatic.appendChild(snip);
+      snippetsStatic.push(snip);
+    }
+    function animateSnippetsStatic() {
+      for (const el of snippetsStatic) {
+        let left = parseFloat(el.style.left);
+        let top = parseFloat(el.style.top);
+        let dx = parseFloat(el.dataset.dx);
+        let dy = parseFloat(el.dataset.dy);
+        left += dx;
+        top += dy;
+        // Wrap around screen
+        if (left > 100) left = -20;
+        if (left < -25) left = 100;
+        if (top > 100) top = -10;
+        if (top < -15) top = 100;
+        el.style.left = left + 'vw';
+        el.style.top = top + 'vh';
+      }
+      requestAnimationFrame(animateSnippetsStatic);
+    }
+    animateSnippetsStatic();
+  }
+
+  // Smooth hero zoom-out on scroll
+  (function() {
+    const heroContent = document.querySelector('.hero-content');
+    if (!heroContent) return;
+    
+    // Set initial scale
+    heroContent.style.transform = 'scale(1.5)';
+    
+    function onScroll() {
+      const minScale = 0.7;
+      const maxScale = 1.5;
+      const scrollStart = 0;
+      const scrollEnd = 400; // px after which hero is fully minimized
+      const scrollY = window.scrollY;
+      let scale = maxScale - (scrollY - scrollStart) * (maxScale - minScale) / (scrollEnd - scrollStart);
+      scale = Math.max(minScale, Math.min(maxScale, scale));
+      heroContent.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('scroll', onScroll);
+  })();
+});
+
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 40) {
+    document.body.classList.add('scrolled');
+  } else {
+    document.body.classList.remove('scrolled');
+  }
 });
