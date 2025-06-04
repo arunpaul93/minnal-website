@@ -42,14 +42,14 @@
             background: transparent;
             position: relative;
             z-index: 10;
-        }
-        .logo {
+        }        .logo {
             font-size: 2.1rem;
             font-weight: 900;
             color: #00ffe7;
             letter-spacing: 2px;
             font-family: 'Inter', sans-serif;
             text-shadow: 0 0 12px #00ffe7, 0 0 32px #6a11cb;
+            animation: gentle-pulse 3s ease-in-out infinite;
         }
         .nav-linear nav ul {
             display: flex;
@@ -116,6 +116,11 @@
             border: 1.5px solid #232946 !important;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
             animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hero-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6) !important;
         }
         /* body.scrolled .hero-content {
             This will be overridden by JS for smooth scaling
@@ -148,8 +153,7 @@
         .hero-desc:hover {
             color: #00ffe7;
             text-shadow: 0 0 16px #00ffe7, 0 0 32px #6a11cb;
-        }
-        .cta-main {
+        }        .cta-main {
             display: inline-block;
             padding: 1.1rem 2.7rem;
             background: linear-gradient(90deg, #00ffe7 0%, #6a11cb 100%);
@@ -159,7 +163,7 @@
             font-size: 1.2rem;
             text-decoration: none;
             box-shadow: 0 0 16px #00ffe788, 0 0 32px #6a11cb44;
-            transition: background 0.2s, color 0.2s;
+            transition: all 0.3s ease;
             border: none;
         }
         .cta-main:hover {
@@ -311,6 +315,16 @@
             0% { opacity: 0.10; filter: blur(0.5px) brightness(1.1); }
             50% { opacity: 0.18; filter: blur(1.2px) brightness(1.3); }
             100% { opacity: 0.10; filter: blur(0.5px) brightness(1.1); }
+        }
+        @keyframes gentle-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         /* Media Queries */
