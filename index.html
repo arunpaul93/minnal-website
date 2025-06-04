@@ -123,23 +123,31 @@
             .hero-content {
                 padding: 3rem 1rem;
             }
-        }
-        .hero-title {            font-size: 4.5rem;
+        }        .hero-title {            font-size: 4.5rem;
             font-weight: 900;
             color: #00ffe7;
             margin-bottom: 1.5rem;
             letter-spacing: 1px;
             font-family: 'Inter', sans-serif;
             text-shadow: 0 0 24px #00ffe7, 0 0 48px #6a11cb;
+            transition: text-shadow 0.3s ease;
+        }        .hero-title:hover {
+            color: #fff;
+            text-shadow: 0 0 32px #00ffe7, 0 0 64px #6a11cb, 0 0 96px #00ffe7;
         }        .hero-desc {
-            color: #ffffff;
-            font-size: 1.6rem;
+            color: #a3a3ff;
+            font-size: 1.1rem;
             margin-bottom: 3rem;
             line-height: 1.5;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            text-shadow: 0 0 16px rgba(0, 255, 231, 0.3), 0 0 32px rgba(106, 17, 203, 0.4);
+            text-shadow: 0 0 8px #6a11cb88;
+            transition: all 0.3s ease;
+        }
+        .hero-desc:hover {
+            color: #00ffe7;
+            text-shadow: 0 0 16px #00ffe7, 0 0 32px #6a11cb;
         }
         .cta-main {
             display: inline-block;
