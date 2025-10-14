@@ -46,7 +46,10 @@
 
     <section class="section" id="contact" aria-label="Contact">
       <h2>Contact</h2>
-      <form class="form" onsubmit="return false" aria-label="Contact form">
+      <form class="form" action="https://api.web3forms.com/submit" method="POST" aria-label="Contact form">
+        <input type="hidden" name="access_key" value="cc1b46a0-e7eb-470e-b295-7b1bad7da4f8" />
+        <input type="hidden" name="subject" value="New Contact Form Submission from Minnal Website" />
+        <input type="hidden" name="from_name" value="Minnal Website Contact Form" />
         <label>
           Name
           <input type="text" name="name" placeholder="Your Name" required />
