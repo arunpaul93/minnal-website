@@ -1,636 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minnal</title>
-    <!-- Lightning emoji favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='56'%3E%26%23x26A1%3B%3C/text%3E%3C/svg%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        /* Reset and base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: transparent !important;
-        }
-        body {
-            font-family: 'Inter', Arial, sans-serif;
-            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%) !important;
-            color: #e0e6f0;
-            min-height: 100vh;
-            overflow-x: hidden;
-            /* Add subtle stars */
-            background-image:
-                radial-gradient(circle, #fff2 1px, transparent 1.5px),
-                radial-gradient(circle, #6a11cb44 1.2px, transparent 1.7px),
-                radial-gradient(circle, #00ffe744 1.1px, transparent 1.6px);
-            background-size: 1200px 800px, 900px 700px, 700px 500px;
-            background-position: 0 0, 200px 100px, 400px 300px;
-        }
-
-        html, main, section, form, .hero-linear, .features-linear, .about-linear, .contact-linear {
-            background: transparent !important;
-            box-shadow: none !important;
-        }
-
-        /* Navigation */
-        .nav-linear {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 2rem 3rem 1.5rem 3rem;
-            background: transparent;
-            position: relative;
-            z-index: 10;
-        }        .logo {
-            font-size: 2.1rem;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: 2px;
-            font-family: 'Inter', sans-serif;
-            text-shadow: none;
-            animation: none;
-        }
-        .nav-linear nav ul {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-        .nav-linear nav ul li a {
-            color: #a3a3ff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: color 0.2s;
-            text-shadow: 0 0 8px #6a11cb88;
-        }
-        .nav-linear nav ul li a:hover {
-            color: #00ffe7;
-            text-shadow: 0 0 12px #00ffe7;
-        }
-        .cta-nav {
-            background: linear-gradient(90deg, #00ffe7 0%, #6a11cb 100%);
-            color: #181c24;
-            font-weight: bold;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            text-decoration: none;
-            padding: 0.7rem 2rem;
-            margin-left: 2rem;
-            box-shadow: 0 0 16px #00ffe788, 0 0 32px #6a11cb44;
-            transition: background 0.2s, color 0.2s;
-            border: none;
-        }
-        .cta-nav:hover {
-            background: #fff;
-            color: #6a11cb;
-        }
-
-        /* Hero section */        .hero-linear {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-            padding: 6rem 0 4rem 0;
-        }
-        .hero-bg-video {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-        }
-        .hero-bg-glass {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            background: linear-gradient(120deg, #232946 60%, #6a11cb 100%);
-            opacity: 0.85;
-            filter: blur(24px) brightness(1.2) saturate(1.3);
-            border-radius: 0 0 48px 48px;
-            box-shadow: 0 0 64px 8px #00ffe744, 0 0 128px 32px #6a11cb33;
-            transition: filter 0.3s ease-out; /* Add transition for blur */
-        }        .hero-content {
-            position: relative;
-            z-index: 20;
-            text-align: center;
-            max-width: 1100px;
-            margin: 0 auto;            padding: 9rem 3rem;
-            background: rgba(20, 24, 40, 0.95) !important;
-            color: #e0e6f0 !important;
-            border: 1.5px solid #232946 !important;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
-            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .hero-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6) !important;
-        }
-        /* body.scrolled .hero-content {
-            This will be overridden by JS for smooth scaling
-        } */        @media (max-width: 700px) {
-            .hero-content {
-                padding: 3rem 1rem;
-            }
-        }        .hero-title {            font-size: 4.5rem;
-            font-weight: 900;
-            color: #00ffe7;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
-            font-family: 'Inter', sans-serif;
-            transition: text-shadow 0.3s ease;
-        }        .hero-title:hover {
-            color: #fff;
-            text-shadow: 0 0 32px #00ffe7, 0 0 64px #6a11cb, 0 0 96px #00ffe7;
-        }        .hero-desc {
-            color: #a3a3ff;
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            line-height: 1.5;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            text-shadow: 0 0 8px #6a11cb88;
-            transition: all 0.3s ease;
-        }
-        .hero-desc:hover {
-            color: #00ffe7;
-            text-shadow: 0 0 16px #00ffe7, 0 0 32px #6a11cb;
-        }        .cta-main {
-            display: inline-block;
-            padding: 1.1rem 2.7rem;
-            background: linear-gradient(90deg, #00ffe7 0%, #6a11cb 100%);
-            color: #181c24;
-            font-weight: bold;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            text-decoration: none;
-            box-shadow: 0 0 16px #00ffe788, 0 0 32px #6a11cb44;
-            transition: all 0.3s ease;
-            border: none;
-        }
-        .cta-main:hover {
-            background: #fff;
-            color: #6a11cb;
-        }
-
-        /* Features section */
-        .features-linear {
-            padding: 5rem 2rem 3rem 2rem;
-            background: transparent !important;
-            text-align: center;
-        }
-        .features-linear h2 {
-            font-size: 2.2rem;
-            margin-bottom: 2.5rem;
-            color: #00ffe7;
-            font-family: 'Inter', sans-serif;
-            text-shadow: 0 0 16px #00ffe7, 0 0 32px #6a11cb;
-        }
-        .features-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2.5rem;
-        }
-        .feature-card-glass {
-            background: rgba(20, 24, 40, 0.98) !important;
-            border-radius: 24px;
-            box-shadow: 0 0 24px #00ffe722, 0 0 32px #6a11cb33;
-            padding: 2.5rem 2rem;
-            width: 300px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1.5px solid #00ffe733;
-            color: #fff;
-            text-align: center;
-            font-size: 1.1rem;
-            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1);
-        }
-        .feature-card-glass h3 {
-            font-size: 1.3rem;
-            color: #00ffe7;
-            margin-bottom: 0.7rem;
-            text-shadow: 0 0 12px #00ffe7, 0 0 24px #6a11cb;
-        }
-        .feature-card-glass p {
-            color: #a3a3ff;
-            font-size: 1rem;
-            text-shadow: 0 0 8px #6a11cb88;
-        }
-        .feature-card-glass:hover {
-            transform: translateY(-8px) scale(1.04);
-            box-shadow: 0 8px 32px rgba(37,117,252,0.15);
-        }
-
-        /* About section */
-        .about-linear {
-            padding: 4rem 2rem 3rem 2rem;
-            background: transparent !important;
-            text-align: center;
-        }
-        .about-linear h2 {
-            font-size: 2rem;
-            color: #00ffe7;
-            font-family: 'Inter', sans-serif;
-            margin-bottom: 1.2rem;
-            text-shadow: 0 0 16px #00ffe7, 0 0 32px #6a11cb;
-        }
-        .about-linear p {
-            font-size: 1.1rem;
-            color: #a3a3ff;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Contact section */
-        .contact-linear {
-            padding: 4rem 2rem 3rem 2rem;
-            background: transparent !important;
-            text-align: center;
-        }
-        .contact-linear h2 {
-            font-size: 2rem;
-            color: #00ffe7;
-            font-family: 'Inter', sans-serif;
-            margin-bottom: 1.2rem;
-            text-shadow: 0 0 16px #00ffe7, 0 0 32px #6a11cb;
-        }
-        .contact-linear form {
-            max-width: 400px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-        .contact-linear input, .contact-linear textarea {
-            padding: 0.9rem 1rem;
-            border: 1px solid #00ffe733;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: inherit;
-            resize: none;
-            background: rgba(20, 24, 40, 0.98) !important;
-            color: #e0e6f0 !important;
-            border: 1.5px solid #232946 !important;
-            box-shadow: 0 2px 16px #000a !important;
-        }
-        .contact-linear input::placeholder,
-        .contact-linear textarea::placeholder {
-            color: #b3b9c5 !important;
-            opacity: 1;
-        }
-        .contact-linear button {
-            padding: 1rem;
-            background: linear-gradient(90deg, #00ffe7 0%, #6a11cb 100%);
-            color: #181c24;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 16px #00ffe788, 0 0 32px #6a11cb44;
-        }
-        .contact-linear button:hover {
-            background: #fff;
-            color: #6a11cb;
-        }
-
-        /* Footer */
-        footer {
-            background: transparent;
-            color: #00ffe7;
-            text-shadow: 0 0 12px #00ffe7, 0 0 32px #6a11cb;
-            text-align: center;
-            padding: 2rem 0 1.5rem 0;
-            font-size: 1rem;
-            letter-spacing: 1px;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(40px) scale(0.98); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes code-pulse {
-            0% { opacity: 0.10; filter: blur(0.5px) brightness(1.1); }
-            50% { opacity: 0.18; filter: blur(1.2px) brightness(1.3); }
-            100% { opacity: 0.10; filter: blur(0.5px) brightness(1.1); }
-        }
-        @keyframes gentle-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Media Queries */
-        @media (max-width: 900px) {
-            .features-list {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-            .nav-linear nav ul {
-                gap: 1rem;
-            }
-        }
-        @media (max-width: 600px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-            .features-linear h2, .about-linear h2, .contact-linear h2 {
-                font-size: 1.3rem;
-            }
-            .feature-card-glass {
-                width: 100%;
-            }
-            .nav-linear {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1.2rem 1rem 1rem 1rem;
-            }
-        }
-
-        /* Code Background Animation */
-        .code-bg-linear {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
-            font-family: 'Fira Code', 'Consolas', monospace;
-            font-size: 1.15rem;
-            color: #00ffe7;
-            background: none;
-            opacity: 0.18;
-            text-shadow: 0 0 16px #00ffe7, 0 0 32px #6a11cb;
-            white-space: pre;
-            line-height: 1.7;
-            filter: blur(0.5px) brightness(1.2);
-            user-select: none;
-        }
-        .moving-code-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-            background: none;
-        }
-        .moving-code-snippet {
-            position: absolute;
-            color: #00ffe7;
-            text-shadow: 0 0 12px #00ffe7, 0 0 24px #6a11cb;
-            font-family: 'Fira Mono', 'Consolas', monospace;
-            font-size: 1.1rem;
-            opacity: 0.13;
-            white-space: pre;
-            user-select: none;
-            transition: opacity 0.5s;
-            will-change: transform;
-        }
-        .moving-code-fg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 12;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .moving-code-fg-snippet {
-            position: absolute;
-            color: #fff;
-            text-shadow: 0 0 8px #00ffe7, 0 0 16px #6a11cb !important;
-            font-family: 'Fira Mono', 'Consolas', monospace;
-            font-size: 1.2rem;
-            opacity: 0.22;
-            white-space: pre;
-            user-select: none;
-            text-shadow: 0 2px 16px #6a11cb44, 0 1px 2px #000a;
-            transition: opacity 0.5s;
-            will-change: transform;
-            pointer-events: none;
-        }
-        .site-bg-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-            pointer-events: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minnal</title>
+  <!-- Lightning emoji favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='56'%3E%26%23x26A1%3B%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Background video removed as requested -->
-    <div class="moving-code-bg"></div>
-    <div class="moving-code-fg"></div>
+  <main class="container">
+    <div class="brand">minnal</div>
 
-    <header class="nav-linear">
-        <div class="logo">minnal</div>
-        <nav>
-            <ul>
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <a href="#" class="cta-nav">Get Started</a>
-    </header>
+    <nav class="links" aria-label="Quick links">
+      <a href="#features">features</a>
+      <span class="sep">|</span>
+      <a href="#about">about</a>
+      <span class="sep">|</span>
+      <a href="#contact">contact</a>
+      <span class="sep">|</span>
+      <a href="/" rel="home">home</a>
+    </nav>
 
-    <main>
-        <div style="
-            width:100vw;
-            height:85vh;
-            position:relative;
-            z-index:2;
-            margin-bottom:0.3rem;
-        ">
-            <h1 style="
-                position:absolute;
-                top:40%;
-                left:50%;
-                transform:translate(-50%,-50%);
-                font-size:4rem;
-                font-weight:900;
-                color:#fff;
-                letter-spacing:2.5px;
-                background: none;
-                text-shadow:
-                    0 1px 2px #fff3,
-                    0 -1px 2px #fff3,
-                    1px 0 2px #fff3,
-                    -1px 0 2px #fff3;
-                filter: none;
-                -webkit-background-clip: unset;
-                -webkit-text-fill-color: unset;
-                background-clip: unset;
-                margin:0;
-            ">Automate your workflows</h1>
-        </div>
+    <section class="section" aria-label="Hero">
+      <h1>Automate your workflows</h1>
+      <p>Lightning fast. No fluff.</p>
+    </section>
 
-        <section id="features" class="features-linear">
-            <h2>Core Features</h2>
-            <div class="features-list">
-                <div class="feature-card-glass">
-                    <h3>Advanced AI</h3>
-                    <p>Leverage cutting-edge artificial intelligence for smart automation and insights.</p>
-                </div>
-                <div class="feature-card-glass">
-                    <h3>Secure Cloud</h3>
-                    <p>Your data is protected with enterprise-grade security and robust cloud infrastructure.</p>
-                </div>
-                <div class="feature-card-glass">
-                    <h3>Scalable Solutions</h3>
-                    <p>Grow without limits. Our platform scales to meet your evolving business needs.</p>
-                </div>
-                <div class="feature-card-glass">
-                    <h3>Intuitive Design</h3>
-                    <p>Enjoy a user experience that's both powerful and incredibly easy to navigate.</p>
-                </div>
-            </div>
-        </section>
+    <section class="section" id="features" aria-label="Features">
+      <h2>Features</h2>
+      <ul>
+        <li>Advanced AI automation</li>
+        <li>Secure cloud</li>
+        <li>Scalable solutions</li>
+        <li>Intuitive design</li>
+      </ul>
+    </section>
 
-        <section id="about" class="about-linear">
-            <h2>About Us</h2>
-            <p>At minnal, we are passionate about building the future. Our team of innovators and engineers are dedicated to delivering solutions that empower businesses and individuals in the digital age. We believe in technology that is not only advanced but also accessible and impactful.</p>
-        </section>
+    <section class="section" id="about" aria-label="About">
+      <h2>About</h2>
+      <p>At minnal, we build practical automation that gets out of your way. We care about speed, reliability, and a developer-first experience.</p>
+    </section>
 
-        <section id="contact" class="contact-linear">
-            <h2>Get in Touch</h2>
-            <form>
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
-    </main>
+    <section class="section" id="contact" aria-label="Contact">
+      <h2>Contact</h2>
+      <form class="form" onsubmit="return false" aria-label="Contact form">
+        <label>
+          Name
+          <input type="text" name="name" placeholder="Your Name" required />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@example.com" required />
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        </label>
+        <button type="submit">Send</button>
+      </form>
+    </section>
 
-    <footer>
-        &copy; 2023 minnal. All rights reserved.
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {            // Hero section zoom and animations removed
-
-
-            // --- Moving Code Background Animation ---
-            // Array of code snippets to display in the background.
-            const codeSnippets = [
-                "const init = () => {",
-                "  console.log('System online...');",
-                "  if (user.auth) { connectDB(); }",
-                "  else { guestMode(); }",
-                "}",
-                "async function fetchData(url) {",
-                "  const res = await fetch(url);",
-                "  return res.json();",
-                "}",
-                "class QuantumEngine {",
-                "  constructor() { this.state = 'idle'; }",
-                "  run() { this.state = 'active'; }",
-                "}",
-                "// Data stream initialized",
-                "const processStream = (data) => data.map(d => d.id);",
-                "function calculateHash(input) {",
-                "  return btoa(input).slice(0, 16);",
-                "}",
-                "if (config.debug) {",
-                "  log('Debug mode active');",
-                "}",
-                "const optimize = (algo) => {",
-                "  return algo.reduce((acc, curr) => acc + curr, 0);",
-                "}",
-                "// End of transmission",
-                "const activateShields = () => true;",
-                "let protocolVersion = 'v3.1.0';",
-                "const authenticateUser = (token) => { /* ... */ };",
-                "function renderUI() { /* ... */ }",
-                "const applyEffect = (target) => { target.style.filter = 'blur(10px)'; };"
-            ];
-
-            /**
-             * Creates a single code snippet element and appends it to the specified container.
-             * @param {HTMLElement} container - The DOM element to append the snippet to.
-             * @param {boolean} isForeground - True if it's a foreground snippet (different styling/speed).
-             * @returns {HTMLElement} The created snippet element.
-             */
-            const createCodeSnippet = (container, isForeground = false) => {
-                const snippet = document.createElement('span');
-                snippet.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-                snippet.className = isForeground ? 'moving-code-fg-snippet' : 'moving-code-snippet';
-                container.appendChild(snippet);
-
-                // Random initial position and speed
-                const startX = Math.random() * window.innerWidth;
-                const startY = Math.random() * window.innerHeight;
-                // Foreground snippets move slightly faster
-                const speed = (Math.random() * 0.5) + (isForeground ? 0.8 : 0.3);
-
-                snippet.style.left = `${startX}px`;
-                snippet.style.top = `${startY}px`;
-                snippet.dataset.speed = speed; // Store speed in a data attribute for animation
-
-                return snippet;
-            };
-
-            const bgCodeContainer = document.querySelector('.moving-code-bg');
-            const fgCodeContainer = document.querySelector('.moving-code-fg');
-            const bgSnippets = []; // Array to hold background snippet elements.
-            const fgSnippets = []; // Array to hold foreground snippet elements.
-
-            const numBgSnippets = 30; // Number of background snippets to generate.
-            const numFgSnippets = 15; // Number of foreground snippets to generate.
-
-            // Populate the background and foreground snippet arrays.
-            for (let i = 0; i < numBgSnippets; i++) {
-                bgSnippets.push(createCodeSnippet(bgCodeContainer));
-            }
-            for (let i = 0; i < numFgSnippets; i++) {
-                fgSnippets.push(createCodeSnippet(fgCodeContainer, true));
-            }
-
-            /**
-             * Animates the code snippets, moving them upwards and resetting their position
-             * and text content once they go off-screen.
-             */
-            const animateCode = () => {
-                // Iterate over all snippets (background and foreground).
-                [...bgSnippets, ...fgSnippets].forEach(snippet => {
-                    let currentY = parseFloat(snippet.style.top);
-                    const speed = parseFloat(snippet.dataset.speed);
-                    currentY -= speed; // Move upwards based on individual speed.
-
-                    // If a snippet moves off the top of the screen, reset it to the bottom
-                    // with a new random horizontal position and text.
-                    if (currentY < -snippet.offsetHeight) {
-                        currentY = window.innerHeight + Math.random() * 100; // Reset below viewport
-                        snippet.style.left = `${Math.random() * window.innerWidth}px`; // New random X position
-                        snippet.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)]; // New random snippet text
-                    }
-                    snippet.style.top = `${currentY}px`; // Apply the new Y position.
-                });
-                requestAnimationFrame(animateCode); // Request the next animation frame for smooth looping.
-            };
-
-            // Start the code animation loop.
-            animateCode();
-        });
-    </script>
+    <footer class="footer">© 2025 minnal</footer>
+  </main>
 </body>
 </html>
