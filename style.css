@@ -1,7 +1,21 @@
+.section {
+  /* ...existing code... */
+  transition: transform 0.2s cubic-bezier(.77,0,.18,1), box-shadow 0.2s;
+}
+.section:hover {
+  transform: scale(1.04);
+  box-shadow: 0 16px 64px #00ff00cc;
+  z-index: 2;
+}
+/* Custom larger pointer */
+body {
+  cursor: pointer;
+}
+
 /* Minnal CMD theme - solid colors (no gradients) */
 body {
   margin: 0;
-  background: #000000;
+  background: #000 !important;
   color: #d0f0d0;
   font-family: 'Fira Mono', Consolas, 'Courier New', monospace;
   overflow-x: hidden;
@@ -9,8 +23,10 @@ body {
 
 .container {
   width: 100%;
-  margin: 0;
-  padding: 40px 0 80px 0;
+  margin: 0 auto;
+  padding: 40px 16px 80px 16px;
+  max-width: 800px;
+  background: transparent;
 }
 
 .brand {
@@ -27,9 +43,9 @@ body {
 .links .sep { color: #2a2a2a; margin: 0 8px; }
 
 .section {
-  background: #111;
+  background: #000;
   border-radius: 12px;
-  box-shadow: 0 2px 16px #00ff0022;
+  box-shadow: 0 8px 32px #00ff0066;
   padding: 40px 5vw;
   margin-top: 32px;
   width: 100%;
@@ -86,8 +102,48 @@ body {
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 2px 8px #00ff0022;
+  transition: all 0.3s ease;
 }
 .form button:hover { background: #009900; color: #fff; }
+
+/* Popup styles */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #00ff00;
+  border-radius: 12px;
+  padding: 0;
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.popup.show {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+.popup-content {
+  padding: 30px 40px;
+  text-align: center;
+  color: #00ff00;
+}
+.popup-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  animation: bounce 0.6s ease;
+}
+.popup-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: 'Fira Mono', monospace;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
 
 .footer {
   margin-top: 36px;

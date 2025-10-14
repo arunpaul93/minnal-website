@@ -11,28 +11,38 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Parallax background -->
+  <div class="parallax-bg" id="parallax"></div>
+  <style>
+    .parallax-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: -1;
+      background: #000 !important;
+    }
+  </style>
+  
   <main class="container">
     <div class="brand">minnal</div>
 
     <nav class="links" aria-label="Quick links">
-      <a href="#features">features</a>
-      <span class="sep">|</span>
-      <a href="#about">about</a>
-      <span class="sep">|</span>
-      <a href="#contact">contact</a>
-      <span class="sep">|</span>
-      <a href="/" rel="home">home</a>
+  <a href="#features">features</a>
+  <span class="sep">|</span>
+  <a href="#about">about</a>
+  <span class="sep">|</span>
+  <a href="#contact">contact</a>
     </nav>
 
     <section class="section" aria-label="Hero">
-      <h1>Automate your workflows</h1>
-      <p>Lightning fast. No fluff.</p>
+  <h1>Your Business Architect</h1>
+  <p>Designing solutions for speed and simplicity.</p>
     </section>
 
     <section class="section" id="features" aria-label="Features">
       <h2>Features</h2>
       <ul>
-        <li>Advanced AI automation</li>
+        <li>Streamlined processes</li>
         <li>Secure cloud</li>
         <li>Scalable solutions</li>
         <li>Intuitive design</li>
@@ -40,16 +50,17 @@
     </section>
 
     <section class="section" id="about" aria-label="About">
-      <h2>About</h2>
-      <p>At minnal, we build practical automation that gets out of your way. We care about speed, reliability, and a developer-first experience.</p>
+  <h2>About</h2>
+  <p>At minnal, we architect business solutions that work for you. We care about speed, reliability, and a user-first experience.</p>
     </section>
 
     <section class="section" id="contact" aria-label="Contact">
       <h2>Contact</h2>
-      <form class="form" action="https://api.web3forms.com/submit" method="POST" aria-label="Contact form">
+      <form class="form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" aria-label="Contact form">
         <input type="hidden" name="access_key" value="cc1b46a0-e7eb-470e-b295-7b1bad7da4f8" />
         <input type="hidden" name="subject" value="New Contact Form Submission from Minnal Website" />
         <input type="hidden" name="from_name" value="Minnal Website Contact Form" />
+        <input type="hidden" name="redirect" value="false" />
         <label>
           Name
           <input type="text" name="name" placeholder="Your Name" required />
@@ -62,11 +73,60 @@
           Message
           <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
         </label>
-        <button type="submit">Send</button>
+        <button type="submit" id="submitBtn">Send</button>
       </form>
     </section>
 
     <footer class="footer">© 2025 minnal</footer>
   </main>
+
+  <!-- Popup notification -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <div class="popup-icon">⚡</div>
+      <div class="popup-text">Message sent successfully!</div>
+    </div>
+  </div>
+
+  <script>
+    // ...existing code...
+    window.addEventListener('scroll', function() {
+      var scrollY = window.scrollY;
+      var bg = document.getElementById('parallax');
+      var posY = 50 + scrollY / 20;
+      bg.style.backgroundPosition = '50% ' + posY + '%';
+    });
+    // ...existing code...
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent default form submission
+      
+      const popup = document.getElementById('popup');
+      const form = this;
+      const formData = new FormData(form);
+      
+      // Show popup
+      popup.classList.add('show');
+      
+      // Submit form via fetch to avoid redirect
+      fetch(form.action, {
+        method: form.method,
+        body: formData
+      }).then(response => {
+        console.log('Form submitted successfully');
+      }).catch(error => {
+        console.error('Form submission error:', error);
+      });
+      
+      // Hide popup after 2 seconds
+      setTimeout(function() {
+        popup.classList.remove('show');
+      }, 2000);
+      
+      // Reset form after submission
+      setTimeout(function() {
+        form.reset();
+      }, 2100);
+    });
+  </script>
 </body>
 </html>
